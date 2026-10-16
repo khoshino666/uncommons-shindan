@@ -166,6 +166,44 @@ nav.links button:hover{color:var(--ink)}
 .share-note{font-size:12px;color:var(--sub);line-height:1.6}
 .copybox{font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;user-select:all;line-height:1.7}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:14px;z-index:20}
+.aru{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.aru li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.6}
+.ctabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:var(--soft);padding:4px;border-radius:999px}
+.ctab{border:none;background:transparent;color:var(--sub);font-weight:700;font-size:14px;min-height:44px;border-radius:999px}
+.ctab.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(27,26,23,.12)}
+.cpanel{display:flex;flex-direction:column;gap:10px}
+.cp{display:flex;flex-direction:column;gap:10px;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;color:var(--ink);transition:transform .15s}
+.cp:hover{transform:translateY(-2px)}
+.cp.good{border-left:5px solid var(--takumi)}
+.cp.bad{border-left:5px solid var(--ax2)}
+.cp-top{display:flex;gap:12px;align-items:center}
+.cicon{width:64px;height:64px;border-radius:50%;overflow:hidden;background:var(--art);flex:0 0 auto;border:2px solid var(--line)}
+.cicon img{width:100%;height:100%;object-fit:cover;transform:scale(1.55);transform-origin:50% 38%}
+.cp-name{display:flex;flex-direction:column;line-height:1.35;min-width:0}
+.cp-mark{font-size:12px;font-weight:700;color:var(--sub)}
+.cp.good .cp-mark{color:var(--takumi)}
+.cp.bad .cp-mark{color:var(--ax2)}
+.cp-name strong{font-family:var(--display);font-weight:800;font-size:22px}
+.cp-name small{font-size:11px;letter-spacing:.08em;font-weight:700}
+.cp-why{font-size:14px;line-height:1.75}
+.cp-tip{font-size:13px;line-height:1.7;background:var(--paper);border-radius:10px;padding:8px 12px;color:var(--ink)}
+.cp-tip b{color:var(--sub);font-size:12px}
+.load{min-height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding-block:32px}
+.seals4{display:flex;gap:10px}
+.seals4 span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--onaccent);font-family:var(--display);font-weight:800;font-size:19px;animation:pulse 2s ease-in-out infinite}
+.seals4 span:nth-child(2){animation-delay:.25s}.seals4 span:nth-child(3){animation-delay:.5s}.seals4 span:nth-child(4){animation-delay:.75s}
+@keyframes pulse{0%,100%{transform:translateY(0);opacity:.55}40%{transform:translateY(-8px);opacity:1}}
+.silo{width:min(240px,64vw);aspect-ratio:640/603;max-width:100%;border-radius:22px;overflow:hidden;background:var(--art);box-shadow:0 10px 30px rgba(27,26,23,.12)}
+.silo img{width:100%;height:100%;object-fit:cover;filter:blur(14px) saturate(.3) opacity(.7);transform:scale(1.08);transition:filter .9s ease, transform .9s ease}
+.silo.found img{filter:none;transform:scale(1)}
+.silo.found{animation:pop .6s ease}
+@keyframes pop{0%{transform:scale(.94)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.lmsg{font-family:var(--display);font-weight:700;font-size:clamp(18px,4.8vw,22px);line-height:1.6;min-height:3.2em;display:flex;align-items:center;justify-content:center;transition:opacity .45s ease, transform .45s ease}
+.lmsg.out{opacity:0;transform:translateY(6px)}
+.lbar{width:min(320px,80%);height:6px;background:var(--soft);border-radius:999px;overflow:hidden}
+.lbar i{display:block;height:100%;width:0;background:var(--ink);border-radius:999px}
+.lsub{font-size:12px;color:var(--sub)}
+@media (prefers-reduced-motion: reduce){.seals4 span,.silo.found{animation:none}}
 .disc{font-size:11px;color:var(--sub);text-align:center;padding-top:28px;line-height:1.7}
 
 @media (max-width:820px){
@@ -218,6 +256,17 @@ nav.links button:hover{color:var(--ink)}
     <div class="qnav">
       <button class="ghost" id="q-back" type="button">← 前の質問</button>
       <button class="ghost" id="q-quit" type="button">やめてトップへ</button>
+    </div>
+  </section>
+
+  <!-- LOADING -->
+  <section id="loading" class="col" hidden>
+    <div class="load" role="status" aria-live="polite">
+      <div class="seals4" aria-hidden="true"><span style="background:var(--matsuri)">祭</span><span style="background:var(--hirameki)">閃</span><span style="background:var(--takumi)">匠</span><span style="background:var(--saku)">策</span></div>
+      <div class="silo" id="silo"><img id="silo-img" src="chars/JSRF.jpg" alt="" width="640" height="603"></div>
+      <p class="lmsg" id="lmsg">診断中です。少々お待ちください。</p>
+      <div class="lbar"><i id="lbar"></i></div>
+      <p class="lsub">100の答えから、あなただけの尖りを読み解いています</p>
     </div>
   </section>
 
@@ -287,7 +336,7 @@ var $ = function(id){ return document.getElementById(id); };
 function img(code, eager){ return '<div class="art"><img src="chars/' + code + '.jpg" alt="' + T[code].n + 'のキャラクター" width="640" height="603"' + (eager ? '' : ' loading="lazy"') + '></div>'; }
 function attrOf(code){ return ATTR[code[1] + code[3]]; }
 function flip(code){ var m = {D:'J',J:'D',S:'G',G:'S',R:'B',B:'R',F:'O',O:'F'}; return code.split('').map(function(c){ return m[c]; }).join(''); }
-function show(id){ ['home','quiz','report'].forEach(function(s){ $(s).hidden = (s !== id); }); }
+function show(id){ ['home','quiz','loading','report'].forEach(function(s){ $(s).hidden = (s !== id); }); }
 function scrollTop(){ window.scrollTo(0,0); }
 function toast(msg){ var el = $('toast'); el.textContent = msg; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function(){ el.hidden = true; }, 2000); }
 
@@ -351,7 +400,7 @@ function renderQ(){
 function answer(v){
   var q = S.list[S.idx]; S.ans[q.no] = v;
   if(S.idx < S.list.length - 1){ S.idx++; save(); renderQ(); }
-  else { clearSave(); var res = compute(); renderReport(codeOf(res.pctA), res); }
+  else { clearSave(); var res = compute(); runLoading(codeOf(res.pctA), res); }
 }
 function compute(){
   var sum = [0,0,0,0], cnt = [0,0,0,0], es = [0,0,0,0,0], ec = [0,0,0,0,0];
@@ -366,6 +415,114 @@ function compute(){
 }
 function codeOf(pctA){ return pctA.map(function(p,i){ return p >= 50 ? AX[i].la : AX[i].lb; }).join(''); }
 function strength(p, isTop){ return p <= 55 ? '両刀：どちらの尖りも出し入れできる' : p <= 70 ? '寄り：場面によって使い分けている' : p <= 85 ? 'はっきり：あなたの武器として表れている' : (isTop ? '振り切れ：ここがあなたの一番の尖り' : '振り切れ：とても強く表れている'); }
+
+// ---------- aruaru ----------
+var AR = {
+ JSRF:['飲み会の幹事を、気づけば3つ掛け持ちしている','LINEグループを作るのは一番早い。まとめるのは別の人','「とりあえず集まろう」が口ぐせ'],
+ JSBF:['サプライズは、本番より準備している時間が楽しい','企画のフォルダに「極秘」がやたら多い','相手の反応を想像して、一人でニヤニヤしている'],
+ DSRF:['説明会では、いつも最前列に座っている','募集が始まった初日に申し込んでいる','振り返ったら、誰もついてきていなかったことがある'],
+ DSBF:['プレゼンの最初の一言に3日かける','友達の誕生日の演出を、頼まれてもいないのに考えている','作業中BGMがないと落ち着かない'],
+ JSRO:['スマホのメモに、思いつきが数千件たまっている','始めた趣味の道具が、押し入れで眠っている','人生を変えるアイデアは、だいたいシャワー中に出る'],
+ JSBO:['本屋で、まったく違うジャンルの本を3冊同時に買う','「これとこれ、混ぜたら面白くない？」が口ぐせ','メモ帳がいつの間にかスクラップブックになっている'],
+ DSRO:['不便を感じたら、その夜には解決する道具を作っている','説明書は読まずに、まず組み立て始める','作ったものに、まだ名前がついていない'],
+ DSBO:['5年前に言っていたことが、最近になって流行っている','「早すぎるよ」と言われ慣れている','人と話す前に、頭の中で議論が終わっている'],
+ DGBO:['ミリ単位のズレが気になって眠れない','同じペンを何年も使い続けている','「あと少しだけ」で締切を迎える'],
+ DGRO:['料理のレシピを、毎回少しずつ変えてしまう','失敗談を、うれしそうに話す','「とりあえず試してみた」が口ぐせ'],
+ JGBO:['スクショのフォルダが数万枚ある','好きなジャンルの年表が、頭に入っている','「それ、似た話があって」で話し始める'],
+ JGRO:['知らない駅で、つい途中下車したくなる','旅の写真より、土産話のほうが長い','地図アプリに保存した場所が数百件ある'],
+ DGBF:['旅行のしおりを、頼まれてもいないのに作る','会議の前に、全員の反応をシミュレーション済み','ボードゲームで負けると、一人反省会を開く'],
+ DGRF:['「貸して、やるよ」が口ぐせ','引っ越しの手伝いで、いつの間にか指揮をとっている','道具には妥協しない'],
+ JGBF:['雑学を話し始めると止まらない','たとえ話が3つ続く','友達から「説明うまいね」とよく言われる'],
+ JGRF:['グループの日程調整は、だいたい自分がやっている','全員の食べ物の好き嫌いを覚えている','人の予定は埋めるのに、自分の予定だけ空白']
+};
+function aruaru(code){
+  return '<div class="sec"><h2>' + T[code].n + 'あるある</h2><ul class="aru">' + AR[code].map(function(a){ return '<li>' + a + '</li>'; }).join('') + '</ul></div>';
+}
+
+// ---------- compatibility ----------
+function flipAt(code, idx){ var m = {D:'J',J:'D',S:'G',G:'S',R:'B',B:'R',F:'O',O:'F'}; return code.split('').map(function(c,i){ return idx.indexOf(i) >= 0 ? m[c] : c; }).join(''); }
+var PH = {
+  // complement: what the partner brings, keyed by my letter
+  work:{
+    D:'あなたが一点に潜っている間、{p}が周りの変化や新しい情報を拾ってきてくれます。',
+    J:'あちこちに跳ぶあなたの興味を、{p}が一つに絞って深めてくれます。',
+    S:'あなたの突飛なアイデアに、{p}が深い知識で裏づけを足してくれます。',
+    G:'あなたが掘り下げた知見を、{p}が意外な角度にズラして面白くしてくれます。',
+    R:'走り出すあなたの横で、{p}が一度立ち止まって穴を埋めてくれます。',
+    B:'考え込むあなたの背中を、{p}が押して一歩目を踏ませてくれます。',
+    F:'人を集めるのはあなた、中身を突き詰めるのは{p}。表と裏がきれいに分かれます。',
+    O:'あなたが作り込んだものを、{p}が人の輪に広げてくれます。'
+  },
+  love:{
+    S:'あなたの思いつきデートを、{p}が「実はここ、こんな歴史があってね」と深めてくれます。',
+    G:'あなたが大事にしている定番を、{p}が思いもよらない楽しみ方に変えてくれます。',
+    R:'勢いで決めがちなあなたを、{p}がやさしく止めてくれます。',
+    B:'迷っているあなたの手を、{p}が引いて外に連れ出してくれます。'
+  },
+  same:{
+    D:'二人とも没頭型なので、黙ってそれぞれのことに集中する時間も苦になりません。',
+    J:'話題があちこち飛んでも、お互いに置いていかれません。',
+    S:'常識をズラす面白がり方が同じで、悪ノリがそのまま通じます。',
+    G:'好きなものを深く語り合えて、「そこまでわかる？」が通じます。',
+    R:'思い立ったらすぐ動けるテンポがぴったりです。',
+    B:'急かさず、相手が考える時間を待てる関係です。',
+    F:'人を巻き込むのが好きな者同士、二人の周りには自然と人が集まります。',
+    O:'一人の時間を大事にする者同士、ちょうどいい距離感を保てます。'
+  },
+  clash:{
+    R:'あなたは今すぐ動きたいのに、{p}は納得するまで動きません。目指す方向が同じぶん、スピードの違いがそのまま衝突になりがちです。',
+    B:'あなたがじっくり詰めたいところを、{p}は先に動かしてしまいます。目指す方向が同じぶん、スピードの違いがそのまま衝突になりがちです。',
+    F:'あなたは休みの日も人と会いたいのに、{p}は一人の時間で充電したいタイプです。',
+    O:'あなたは一人の時間で充電したいのに、{p}は休みのたびに誰かと会う予定を入れてきます。',
+    D:'没頭しているあなたに、{p}は思いついたことを次々と話しかけたくなります。',
+    J:'あなたが話しかけても、没頭中の{p}は上の空なことがあります。'
+  }
+};
+function ph(set, letter, p){ return PH[set][letter].replace('{p}', p); }
+function compat(code){
+  var c = code.split(''), out = {};
+  var w1 = flip(code), w2 = flipAt(code,[0,2]), w3 = flipAt(code,[2]), l1 = flipAt(code,[1,2]), l2 = flipAt(code,[0,3]);
+  out.work = [
+    {k:w1, mark:'◎', label:'最強の相棒', tone:'good',
+     why: T[code].pt + ph('work', c[1], T[w1].n) + ph('work', c[2], T[w1].n),
+     tip:'役割をはっきり分けるほど力が出ます。「どこから先は任せるか」を最初に決めましょう。'},
+    {k:w2, mark:'○', label:'頼れる右腕', tone:'good',
+     why: '同じ' + attrOf(code).s + 'どうし。' + ph('same', c[1], '') + 'そのうえで、進め方はまったくの逆です。' + ph('work', c[2], T[w2].n) + ph('work', c[0], T[w2].n),
+     tip:'ゴールだけ共有して、進め方はお互いに口を出さないのがコツです。'},
+    {k:w3, mark:'△', label:'ぶつかりやすい', tone:'bad',
+     why: '発想も熱の伝え方もよく似ていて、話せばすぐに意気投合します。ただし' + ph('clash', c[2], T[w3].n),
+     tip:'最初に「締切」と「どこまで詰めたら動くか」を決めておけば、むしろ最速のコンビになれます。'}
+  ];
+  out.love = [
+    {k:l1, mark:'◎', label:'一緒にいて自然体', tone:'good',
+     why: ph('same', c[3], '') + ph('same', c[0], '') + 'そのうえで、' + ph('love', c[1], T[l1].n) + ph('love', c[2], T[l1].n),
+     tip:'生活のリズムが合うので、一緒にいるほど打ち解けます。相手の「意外な一面」を面白がると長続きします。'},
+    {k:w1, mark:'○', label:'刺激し合う関係', tone:'good',
+     why: 'すべての軸が逆なので、一緒にいると知らない世界を次々と見せてくれます。' + ph('love', c[1], T[w1].n) + 'ただ、休日の過ごし方はまるで違うので、合わせすぎると疲れます。',
+     tip:'「一緒にすること」と「別々にすること」を分けておくと、いい刺激だけが残ります。'},
+    {k:l2, mark:'△', label:'すれ違いやすい', tone:'bad',
+     why: '価値観や動き出しのテンポは似ているので、最初はすぐに仲良くなれます。ただし' + ph('clash', c[3], T[l2].n) + ph('clash', c[0], T[l2].n),
+     tip:'会う頻度と「一人の時間」のルールを先に話しておけば、すれ違いはずっと減ります。'}
+  ];
+  return out;
+}
+function compatBlock(code, isResult){
+  var cp = compat(code), who = isResult ? 'あなた' : T[code].n;
+  function list(items){
+    return items.map(function(x){
+      var t2 = T[x.k], a2 = attrOf(x.k), why = isResult ? x.why : x.why.replace(/あなた/g, T[code].n);
+      return '<button type="button" class="cp ' + x.tone + '" data-type="' + x.k + '">' +
+        '<div class="cp-top"><div class="cicon"><img src="chars/' + x.k + '.jpg" alt="" loading="lazy"></div>' +
+        '<div class="cp-name"><span class="cp-mark">' + x.mark + ' ' + x.label + '</span><strong>' + t2.n + '</strong><small style="color:' + a2.c + '">' + a2.s + '・' + x.k + '</small></div></div>' +
+        '<p class="cp-why">' + why + '</p><p class="cp-tip"><b>うまくいくコツ</b>　' + x.tip + '</p></button>';
+    }).join('');
+  }
+  return '<div class="sec"><h2>' + who + 'の相性</h2>' +
+    '<div class="ctabs" role="tablist"><button type="button" role="tab" class="ctab on" data-ctab="work" aria-selected="true">仕事</button><button type="button" role="tab" class="ctab" data-ctab="love" aria-selected="false">恋愛・プライベート</button></div>' +
+    '<div class="cpanel" data-cpanel="work">' + list(cp.work) + '</div>' +
+    '<div class="cpanel" data-cpanel="love" hidden>' + list(cp.love) + '</div>' +
+    '<p class="note">△は「合わない」ではなく、お互いを知れば一番伸びる関係です。キャラを押すとそのタイプの解説が読めます。</p></div>';
+}
 
 // ---------- report (result when res given, zukan detail otherwise) ----------
 var lastShare = '';
@@ -426,19 +583,43 @@ function renderReport(code, res){
       (res ? '<div class="lead">あなたのタイプは</div>' : '') +
       '<h1 class="tname">' + t.n + '</h1><p class="catch">' + t.c + '</p><p class="aline">' + at.s + '：' + at.one + '</p></div>' +
     '<div class="desc">' + (res ? '<p>' + t.d[0] + '</p><p>' + t.d[1] + '</p>' : '<p>' + t.d[0].replace(/のあなたは/g,'は').replace(/あなた/g,'この人') + '</p><p>' + t.d[1].replace(/のあなたは/g,'は').replace(/あなた/g,'この人') + '</p>') + '</div>' +
+    aruaru(code) +
     scores +
     '<div class="sec"><h2>' + you + 'の尖り</h2>' + stg + '</div>' +
     '<div class="sec"><h2>落とし穴と、その越え方</h2><p>' + t.p + '</p></div>' +
     '<div class="sec"><h2>セッションでの役割</h2><p>' + t.r + '</p></div>' +
-    '<button type="button" class="partner" data-type="' + pc + '">' + img(pc) + '<div><div class="pl">相棒タイプ</div><div class="pn">' + pt.n + '</div><div class="code" style="color:var(--sub)">' + pc + '・' + pat.s + '</div><p>' + t.pt + '</p><span class="more">' + pt.n + 'の解説を見る →</span></div></button>' +
+    compatBlock(code, !!res) +
     '<div class="step"><div class="sl">明日やる、小さな一歩</div><p>' + t.st + '</p></div>' +
     '<div class="actions">' + actions + '</div>' +
     '<p class="disc">この診断は、自分の特性を知り活かすためのもので、医学的な診断ではありません。</p>';
   show('report'); scrollTop();
 }
 
+// ---------- loading (about 10 seconds) ----------
+var LT = [];
+function cancelLoading(){ LT.forEach(function(t){ clearTimeout(t); clearInterval(t); }); LT = []; }
+function runLoading(code, res){
+  cancelLoading(); show('loading'); scrollTop();
+  var msgs = ['診断中です。少々お待ちください。', 'あなたの答えを、4つの軸に並べています…', '尖りの振り幅を、そっとはかっています…', 'あなたが爆発する場所を、探しています…', '16のキャラの中から、あなたを探しています…'];
+  var el = $('lmsg'), silo = $('silo'), im = $('silo-img'), bar = $('lbar');
+  silo.classList.remove('found'); el.classList.remove('out'); el.textContent = msgs[0];
+  bar.style.transition = 'none'; bar.style.width = '0%';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.transition = 'width 9.4s cubic-bezier(.35,.1,.25,1)'; bar.style.width = '100%'; }); });
+  function say(text){ el.classList.add('out'); LT.push(setTimeout(function(){ el.textContent = text; el.classList.remove('out'); }, 450)); }
+  msgs.slice(1).forEach(function(m, i){ LT.push(setTimeout(function(){ say(m); }, 1900 * (i + 1))); });
+  var codes = Object.keys(T), k = 0;
+  var spin = setInterval(function(){ k = (k + 1) % codes.length; im.src = 'chars/' + codes[k] + '.jpg'; }, 260);
+  LT.push(spin);
+  LT.push(setTimeout(function(){
+    clearInterval(spin); im.src = 'chars/' + code + '.jpg'; silo.classList.add('found');
+    say('見つかりました。あなたは「' + T[code].n + '」です。');
+  }, 8800));
+  LT.push(setTimeout(function(){ cancelLoading(); renderReport(code, res); }, 10400));
+}
+
 // ---------- navigation ----------
 function go(where){
+  cancelLoading();
   if(where === 'start' || where === 'zukan' || where === 'home'){
     show('home');
     var el = where === 'zukan' ? $('zukan-anchor') : null;
@@ -447,6 +628,13 @@ function go(where){
 }
 document.addEventListener('click', function(e){
   var g = e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+  var ct = e.target.closest('[data-ctab]');
+  if(ct){
+    var key = ct.getAttribute('data-ctab'), root = ct.closest('.sec');
+    root.querySelectorAll('[data-ctab]').forEach(function(b){ var on = b === ct; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    root.querySelectorAll('[data-cpanel]').forEach(function(p){ p.hidden = p.getAttribute('data-cpanel') !== key; });
+    return;
+  }
   var ty = e.target.closest('[data-type]'); if(ty){ renderReport(ty.getAttribute('data-type'), null); return; }
   if(e.target.id === 'btn-share'){
     var box = $('copybox');
@@ -456,7 +644,7 @@ document.addEventListener('click', function(e){
   }
 });
 $('btn-start').addEventListener('click', function(){ start('full'); });
-$('btn-sample').addEventListener('click', function(){ renderReport('JSRO', {pctA:[22,72,88,39], env:[5,5,3,4,4]}); });
+$('btn-sample').addEventListener('click', function(){ runLoading('JSRO', {pctA:[22,72,88,39], env:[5,5,3,4,4]}); });
 $('scale').addEventListener('click', function(e){ var b = e.target.closest('.dot'); if(b) answer(parseInt(b.getAttribute('data-v'),10)); });
 $('q-back').addEventListener('click', function(){ if(S.idx > 0){ S.idx--; save(); renderQ(); } });
 $('q-quit').addEventListener('click', function(){ clearSave(); go('home'); });
