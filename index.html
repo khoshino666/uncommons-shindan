@@ -1,0 +1,475 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>アンコモンズ診断</title>
+<meta name="description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す100問の診断です。">
+<meta property="og:title" content="アンコモンズ診断">
+<meta property="og:description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す100問の診断です。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://khoshino666.github.io/uncommons-shindan/">
+<meta property="og:image" content="https://khoshino666.github.io/uncommons-shindan/chars/JSRO.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: a booklet on washi paper. Home is a 960px catalogue (hero, axes, attributes, 16-character zukan); reports are a 640px column with a dark ink band for the reveal. */
+:root{
+  --paper:#F3ECDF; --card:#FFFDF8; --art:#F5EEE1; --ink:#1B1A17; --sub:#5C554A; --line:#D9CDB8; --soft:#E7DDCB;
+  --band:#1B1A17; --bandfg:#F3ECDF; --bandsub:#CFC4B0;
+  --matsuri:#B23A1E; --hirameki:#2A4F8F; --takumi:#2F6B4F; --saku:#5B3F8C;
+  --ax1:#2A6C9C; --ax2:#A87412; --ax3:#B23A1E; --ax4:#6E52A3;
+  --onaccent:#FFFFFF;
+  --display:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --body:'Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#17150F; --card:#211E17; --art:#F5EEE1; --ink:#EFE7D8; --sub:#B3A994; --line:#3A352B; --soft:#2E2A21;
+  --band:#0E0D0A; --bandfg:#F3ECDF; --bandsub:#B3A994;
+  --matsuri:#E0694B; --hirameki:#6F97D6; --takumi:#5FA884; --saku:#A68AD6;
+  --ax1:#5EA0D0; --ax2:#D7A23F; --ax3:#E0694B; --ax4:#A68AD6;
+  --onaccent:#140F0A; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#17150F; --card:#211E17; --art:#F5EEE1; --ink:#EFE7D8; --sub:#B3A994; --line:#3A352B; --soft:#2E2A21;
+  --band:#0E0D0A; --bandfg:#F3ECDF; --bandsub:#B3A994;
+  --matsuri:#E0694B; --hirameki:#6F97D6; --takumi:#5FA884; --saku:#A68AD6;
+  --ax1:#5EA0D0; --ax2:#D7A23F; --ax3:#E0694B; --ax4:#A68AD6;
+  --onaccent:#140F0A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.8}
+img{max-width:100%;display:block}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+button{font-family:var(--body);cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ax1);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px}
+.col{max-width:640px;margin:0 auto}
+
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--display);font-weight:800;letter-spacing:.14em;font-size:17px;background:none;border:none;color:var(--ink);padding:8px 0;min-height:44px}
+nav.links{display:flex;gap:4px}
+nav.links button{background:none;border:none;color:var(--sub);font-size:13px;font-weight:700;padding:10px 10px;min-height:44px}
+nav.links button:hover{color:var(--ink)}
+
+.art{background:var(--art);border-radius:18px;overflow:hidden}
+.art img{width:100%;height:auto}
+
+/* home */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding-block:44px 36px}
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--sub)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,7vw,60px);line-height:1.2;margin-top:10px}
+.hero .lead{margin-top:16px;font-size:16px}
+.hero-cast{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hero-cast .art{border-radius:14px}
+.modes{display:grid;gap:10px;margin-top:24px}
+.mode{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:62px;padding:14px 20px;border-radius:14px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);text-align:left;font-size:16px;font-weight:700}
+.mode.primary{background:var(--ink);color:var(--paper)}
+.mode span{font-size:12px;font-weight:500;opacity:.8}
+.linkbtn{background:none;border:none;color:var(--sub);text-decoration:underline;font-size:14px;padding:10px 0;min-height:44px}
+.note{font-size:12px;color:var(--sub);line-height:1.7}
+.sec-h{display:flex;flex-direction:column;gap:6px;padding-block:44px 18px;border-top:1px solid var(--line)}
+.sec-h h2{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.6vw,32px)}
+.sec-h p{color:var(--sub)}
+.axes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.axcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.axcard .n{font-size:12px;color:var(--sub);letter-spacing:.1em}
+.axcard .poles{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.4}
+.axcard .poles i{font-style:normal;color:var(--sub);font-size:14px;margin:0 4px}
+.axcard p{font-size:13px;line-height:1.7;color:var(--sub)}
+.axcard .bar{height:4px;border-radius:2px}
+.attr-block{display:flex;flex-direction:column;gap:14px;margin-bottom:30px}
+.attr-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.chip{display:inline-block;color:var(--onaccent);font-family:var(--display);font-weight:800;font-size:15px;padding:3px 14px;border-radius:999px}
+.attr-head .one{font-weight:700}
+.attr-head .meta{font-size:12px;color:var(--sub)}
+.zukan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.zcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 8px 14px;min-width:0;display:flex;flex-direction:column;gap:8px;text-align:left;color:var(--ink);transition:transform .15s, box-shadow .15s}
+.zcard:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(27,26,23,.10)}
+.zcard .art{border-radius:12px}
+.zcard .zn{font-family:var(--display);font-weight:800;font-size:20px;padding-inline:6px;display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.zcard .zn small{font-family:var(--body);font-weight:500;font-size:11px;letter-spacing:.14em;color:var(--sub)}
+.zcard .zc{font-size:12.5px;line-height:1.6;padding-inline:6px}
+
+/* quiz */
+.qhead{display:flex;justify-content:space-between;align-items:center;padding-block:18px 8px;font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.progress{height:6px;background:var(--soft);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--ink);border-radius:999px;transition:width .25s}
+.qcard{padding-block:44px 28px;min-height:200px;display:flex;flex-direction:column;justify-content:center}
+.qno{font-family:var(--display);font-size:14px;color:var(--sub);margin-bottom:10px}
+.qtext{font-family:var(--display);font-weight:700;font-size:clamp(20px,5.4vw,26px);line-height:1.6;text-wrap:balance}
+.scale{display:flex;justify-content:space-between;align-items:center;gap:4px;padding-block:8px}
+.dot{border-radius:50%;border:2.5px solid var(--c);background:transparent;padding:0;flex:0 0 auto;transition:transform .12s, background .12s}
+.dot:hover{transform:scale(1.08)}
+.dot.on{background:var(--c)}
+.scale-labels{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding-top:6px}
+.scale-labels .neg{color:var(--sub)}
+.qnav{display:flex;justify-content:space-between;padding-top:28px}
+.ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:10px 18px;min-height:44px;font-size:14px}
+.ghost[disabled]{opacity:.35;cursor:default}
+
+/* report */
+.back{padding-block:14px 0}
+.band{background:var(--band);color:var(--bandfg);border-radius:20px;margin-top:16px;padding:20px 20px 26px;display:flex;flex-direction:column;gap:14px}
+.band .art{border-radius:14px}
+.band .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.code{font-size:12px;letter-spacing:.24em;color:var(--bandsub)}
+.band .lead{font-size:13px;color:var(--bandsub)}
+.tname{font-family:var(--display);font-weight:800;font-size:clamp(46px,13vw,68px);line-height:1.05;letter-spacing:.04em}
+.catch{font-family:var(--display);font-weight:700;font-size:clamp(20px,5.6vw,25px);line-height:1.55}
+.aline{font-size:13px;color:var(--bandsub)}
+.desc{display:flex;flex-direction:column;gap:12px;padding-block:26px 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;margin-top:20px;display:flex;flex-direction:column;gap:20px}
+.card-h{display:flex;justify-content:space-between;align-items:baseline}
+.card-h h2{font-size:18px}
+.card-h span{font-size:12px;color:var(--sub)}
+.axis{display:flex;flex-direction:column;gap:7px}
+.axis .lbl{font-size:14px}
+.axis .lbl b{font-variant-numeric:tabular-nums}
+.top-tag{margin-left:8px;font-size:11px;font-weight:700;color:var(--onaccent);background:var(--ax3);padding:2px 9px;border-radius:999px;vertical-align:2px}
+.track{position:relative;height:10px;border-radius:999px}
+.knob{position:absolute;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:var(--card);border:3px solid;transition:left .5s}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--sub)}
+.ends b{color:var(--ink)}
+.strength{font-size:12px;color:var(--sub)}
+.meter{display:flex;flex-direction:column;gap:6px}
+.meter .row{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.segs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.segs i{height:8px;border-radius:2px;background:var(--soft)}
+.segs i.on{background:var(--ink)}
+.segs.hot i.on{background:var(--ax3)}
+.envsum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.envsum div{background:var(--paper);border-radius:10px;padding:12px;font-size:13px;line-height:1.65;min-width:0}
+.envsum strong{display:block;margin-bottom:4px}
+.sec{padding-top:28px;display:flex;flex-direction:column;gap:10px}
+.sec h2{font-size:18px}
+.tg{display:flex;gap:14px;align-items:baseline;font-size:14px;line-height:1.7}
+.tg .k{font-family:var(--display);font-weight:800;font-size:18px;flex:0 0 auto}
+.partner{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:28px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center;text-align:left;color:var(--ink);width:100%}
+.partner .art{border-radius:12px}
+.partner .pl{font-size:12px;letter-spacing:.1em;color:var(--sub)}
+.partner .pn{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.3}
+.partner p{font-size:13.5px;line-height:1.7;margin-top:4px}
+.partner .more{font-size:12px;color:var(--sub);text-decoration:underline;margin-top:6px;display:inline-block}
+.step{border:2px dashed var(--ax3);border-radius:14px;padding:18px;margin-top:20px}
+.step .sl{font-size:12px;font-weight:700;color:var(--ax3)}
+.step p{margin-top:4px;font-size:14px}
+.actions{display:grid;gap:10px;padding-top:28px}
+.cta{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:999px;font-size:16px;font-weight:700;text-decoration:none;border:none;width:100%}
+.cta.fill{background:var(--ink);color:var(--paper)}
+.cta.line{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.share{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.share-h{font-weight:700;font-size:16px}
+.share-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.sbtn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 12px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:700;text-decoration:none;border:none;text-align:center}
+.sbtn:hover{opacity:.85}
+.share-note{font-size:12px;color:var(--sub);line-height:1.6}
+.copybox{font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;user-select:all;line-height:1.7}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:14px;z-index:20}
+.disc{font-size:11px;color:var(--sub);text-align:center;padding-top:28px;line-height:1.7}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;gap:24px;padding-block:28px 28px}
+  .hero-cast{order:-1}
+  .axes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .zukan{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:400px){ .partner{grid-template-columns:96px minmax(0,1fr)} nav.links button{padding:10px 6px} }
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <button class="logo" type="button" data-go="home">UNCOMMONS</button>
+    <nav class="links"><button type="button" data-go="start">診断する</button><button type="button" data-go="zukan">キャラ図鑑</button></nav>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="hero" id="start-anchor">
+      <div>
+        <div class="eyebrow">あなたの尖りと、爆発する場所</div>
+        <h1>アンコモンズ診断</h1>
+        <p class="lead">集中のしかた、発想のしかた、動き出し、熱の伝わり方。4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出します。</p>
+        <div class="modes">
+          <button class="mode primary" id="btn-start" type="button">診断をはじめる<span>100問・約12分</span></button>
+        </div>
+        <button class="linkbtn" id="btn-sample" type="button">先にサンプル結果（花火師）を見る</button>
+        <p class="note">7段階で、直感で答えてください。途中で閉じても、続きから再開できます。この診断は自分の特性を知り活かすためのもので、医学的な診断ではありません。</p>
+      </div>
+      <div class="hero-cast" id="hero-cast"></div>
+    </div>
+
+    <div class="sec-h"><h2>4つの軸</h2><p>どちらが良い・悪いではなく、どちらも「尖り」です。回答から、それぞれどちらにどれくらい寄っているかを%で出します。</p></div>
+    <div class="axes" id="axes"></div>
+
+    <div class="sec-h" id="zukan-anchor"><h2>16キャラ図鑑</h2><p>属性は「発想」と「熱」の組み合わせ、キャラは「集中」と「動き出し」で決まります。気になるキャラを押すと解説が読めます。</p></div>
+    <div id="zukan"></div>
+    <p class="disc">この診断は、自分の特性を知り活かすためのもので、医学的な診断ではありません。</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="col" hidden>
+    <div class="qhead"><span id="q-count">1 / 100</span><span id="q-mode">アンコモンズ診断</span></div>
+    <div class="progress"><i id="q-bar" style="width:0%"></i></div>
+    <div class="qcard"><div class="qno" id="q-no">Q1</div><div class="qtext" id="q-text"></div></div>
+    <div class="scale" id="scale" role="group" aria-label="回答"></div>
+    <div class="scale-labels"><span class="neg">まったく違う</span><span>まさに私</span></div>
+    <div class="qnav">
+      <button class="ghost" id="q-back" type="button">← 前の質問</button>
+      <button class="ghost" id="q-quit" type="button">やめてトップへ</button>
+    </div>
+  </section>
+
+  <!-- REPORT (result or zukan detail) -->
+  <section id="report" class="col" hidden></section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+// ---------- data ----------
+var AX = [
+  {name:'集中', A:'潜る', B:'跳ぶ', la:'D', lb:'J', c:'var(--ax1)', help:'一つに深く没頭するか、次々と興味を移して点をつなぐか。'},
+  {name:'発想', A:'ズラす', B:'掘る', la:'S', lb:'G', c:'var(--ax2)', help:'常識の逆や横を突くか、一点を偏愛的に深めるか。'},
+  {name:'動き出し', A:'即動', B:'熟成', la:'R', lb:'B', c:'var(--ax3)', help:'思いついた瞬間に動くか、頭の中で完成させてから出すか。'},
+  {name:'熱', A:'巻き込む', B:'突き抜ける', la:'F', lb:'O', c:'var(--ax4)', help:'熱量で人を動かすか、一人で異常な完成度に到達するか。'}
+];
+var AXQ = [
+ ['好きなことをやり始めると、気づいたら朝になっている。','ブラウザのタブが常に20個以上開いている。','一度ハマったテーマは、何年たっても語り続けられる。','会議中に、まったく関係ないアイデアが浮かんで頭がそっちに行く。','集中しているときに話しかけられると、戻るのにすごく時間がかかる。','同時に3つ以上のプロジェクトを回しているほうが調子がいい。','ご飯を食べ忘れるほど、何かに没頭したことがある。','本や動画は、途中で別のものに乗り換えることが多い。','興味のないことには、驚くほど集中力が続かない。その分、興味のあることは止まらない。','雑談の話題があちこちに飛んで「何の話だっけ？」とよく言われる。','一つのことを極めるまで、次のことに手をつけたくない。','新しい趣味を始めるのは得意だが、3ヶ月後には別の趣味に夢中になっている。','作業中は音楽も通知もすべて消したい。','カフェのざわざわした場所のほうが、むしろ頭が回る。','「ゾーンに入る」感覚がはっきりわかる。','一見関係なさそうな分野同士をつなげるのが好きだ。','何かを調べ始めると、関連情報を深く深く掘り続けてしまう。','何かを調べ始めると、気づけば全然違うページを読んでいる。','締切がなくても、熱中したら最後までやり切れる。','退屈な時間が5分でも続くと、スマホか別のことに手が伸びる。'],
+ ['「普通はこうするよね」と言われると、逆をやりたくなる。','人から「マニアックすぎる」と言われるほど詳しい分野がある。','行列ができている店より、誰も入っていない店が気になる。','好きなものの、ほんの細かい違いまで説明できる。','ルールを見ると、まず「抜け道」や「別の使い方」を考えてしまう。','流行りものより、自分だけが好きなものを掘り下げたい。','会議で「それ、逆にしたら面白くない？」とよく言う。','一つのことを突き詰めた結果、思いがけない発見をしたことがある。','商品や広告を見ると「自分ならこう変える」と勝手に企画し始める。','説明書や仕様書を隅々まで読むのが苦にならない。','違和感を覚えると、それをネタにしたくなる。','「なぜそうなるのか」を根本まで理解しないと気が済まない。','道具や場所を、本来とは違う用途で使うのが好きだ。','気になった人や作品の、過去の全部を追いかけたくなる。','正解が一つに決まっている問題は、あまりワクワクしない。','自分の専門分野の話になると、止まらなくなる。','まったく違う業界のやり方を、自分の仕事に持ち込むのが得意だ。','同じテーマを、何年も飽きずに研究し続けられる。','人と同じ答えを出すと、少し負けた気がする。','広く浅くより、狭く深くのほうが性に合う。'],
+ ['思いついたら、その日のうちに誰かに連絡している。','アイデアは、しばらく寝かせてから出したほうがいいものになる。','説明書を読む前に、とりあえず触ってみる。','頭の中で何度もシミュレーションしてから動く。','計画を立てている時間がもったいないと感じる。','中途半端な状態で人に見せるのは、どうしても抵抗がある。','勢いで申し込んだり、買ったりしたことが何度もある。','最初の一歩は遅いが、動き出したら一気に仕上げる。','「とりあえずやってみた」が口ぐせだ。','散歩中やお風呂で、ずっと温めていた答えが突然降りてくる。','失敗しても、すぐ次を試せばいいと思える。','準備が整うまで、なかなか着手できない。','締切ギリギリより、思い立った瞬間のほうが力が出る。','締切直前に、ものすごい集中力で一気に仕上げるタイプだ。','会議で決まったことを、会議中にもう動かし始めている。','人の意見を聞いたあと、一人で考える時間がほしい。','やる前に悩むより、やってから悩むほうがいい。','ノートやメモに、まだ誰にも見せていない構想がたくさん眠っている。','待つのが本当に苦手だ。','一度出したら、ほぼ完成形になっているとよく言われる。'],
+ ['面白いことを思いつくと、すぐ誰かに話したくなる。','一人で作業しているときが、一番いい仕事ができる。','気づいたら、飲み会やイベントの幹事をやっている。','人に説明するより、作ったものを見せたほうが早い。','自分が本気で話すと、相手の目つきが変わる瞬間がある。','人に合わせて妥協するくらいなら、自分一人でやりたい。','初対面の人とでも、すぐに一緒に何かを始められる。','大人数の場のあとは、一人の時間で回復したい。','「〇〇さんがやるなら乗る」と言われたことがある。','他人が見たら「そこまでやる？」と言うレベルまで作り込んでしまう。','アイデアは、人とぶつけ合うほど面白くなると思う。','自分のこだわりを、人にうまく説明できないことがある。','誰かの熱い話を聞くと、自分も何か手伝いたくなる。','チームより、少数精鋭か一人のほうが速く進む。','人前で話すとき、テンションが上がって予定以上に話してしまう。','評価されなくても、自分が納得できればそれでいい。','仲間が増えるほど、自分のやる気も上がる。','誰にも邪魔されない「自分の基地」のような場所がある。','SNSや人前で、自分の挑戦を宣言するのが好きだ。','完成するまで、何を作っているか人に言いたくない。']
+];
+var ENVQ = [
+ [0,1,'追い込まれたときほど、とんでもない力が出る。'],[0,-1,'プレッシャーがかかると、頭が真っ白になりやすい。'],[0,1,'期限のない仕事は、いつまでも手がつかない。'],[0,-1,'時間に余裕があるときのほうが、いいアイデアが出る。'],
+ [1,1,'「やり方は任せる」と言われると、俄然やる気が出る。'],[1,1,'細かくルールを決められると、息が詰まる。'],[1,-1,'ゴールとやり方がはっきり決まっているほうが動きやすい。'],[1,-1,'選択肢が多すぎると、逆に決められなくなる。'],
+ [2,1,'人がたくさんいる場所のほうが、エネルギーが湧く。'],[2,-1,'信頼できる相棒が一人いれば、どこまでも行ける。'],[2,1,'知らない人ばかりの場でも、すぐに楽しめる。'],[2,-1,'少人数か一対一のほうが、本音で力を出せる。'],
+ [3,1,'毎日同じルーティンだと、だんだん元気がなくなる。'],[3,1,'行ったことのない場所に行くと、アイデアが次々わく。'],[3,-1,'音や光、人の動きが多い場所は、すぐに疲れてしまう。'],[3,-1,'決まった場所・決まった道具だと、安心して力を出せる。'],
+ [4,1,'「すごい！」と言われると、本当に何倍も頑張れる。'],[4,1,'すぐに反応が返ってこないと、やる気が続かない。'],[4,-1,'人の評価より、自分の中の手応えのほうが大事だ。'],[4,-1,'注目されすぎると、かえってやりにくくなる。']
+];
+var SHORT = [1,2,4,5,9,21,22,25,28,29,41,42,43,46,48,61,62,64,65,68,81,85,89,93,97];
+var ENV = [
+ {name:'締切・緊張感', hi:'追い込みで燃える', lo:'余裕があると冴える', hg:'締切が近い短期決戦', hw:'期限のない仕事', lg:'時間に余裕のある場', lw:'急な締切が続く場'},
+ {name:'裁量・自由度', hi:'任されて燃える', lo:'型があると動ける', hg:'やり方を任される場', hw:'細かい手順が決まった仕事', lg:'ゴールと手順が明確な場', lw:'丸投げされる仕事'},
+ {name:'人との距離', hi:'大勢で燃える', lo:'少人数で燃える', hg:'人が大勢集まる場', hw:'一人きりの作業が続く場', lg:'少人数や一対一の場', lw:'知らない人ばかりの大人数の場'},
+ {name:'刺激・変化', hi:'変化で燃える', lo:'静けさで冴える', hg:'毎回テーマが変わる場', hw:'毎日同じルーティン', lg:'決まった場所と道具がある場', lw:'音や人の動きが多い騒がしい場'},
+ {name:'承認・反応', hi:'反応で燃える', lo:'手応えで進む', hg:'すぐに反応が返ってくる場', hw:'反応のないまま続く仕事', lg:'自分のペースで評価される場', lw:'常に注目され続ける場'}
+];
+var ATTR = {
+  SF:{k:'祭', n:'祭（マツリ）属性', s:'祭属性', c:'var(--matsuri)', one:'常識をズラして、人と街を巻き込む。', axes:'ズラす × 巻き込む', place:'商店街', list:['JSRF','JSBF','DSRF','DSBF']},
+  SO:{k:'閃', n:'閃（ヒラメキ）属性', s:'閃属性', c:'var(--hirameki)', one:'一人の頭で、誰も見たことのない発想を生む。', axes:'ズラす × 突き抜ける', place:'倉庫', list:['JSRO','JSBO','DSRO','DSBO']},
+  GO:{k:'匠', n:'匠（タクミ）属性', s:'匠属性', c:'var(--takumi)', one:'偏愛で掘り、誰も届かない完成度へ。', axes:'掘る × 突き抜ける', place:'工場', list:['DGBO','DGRO','JGBO','JGRO']},
+  GF:{k:'策', n:'策（サク）属性', s:'策属性', c:'var(--saku)', one:'深い知見と戦略で、人を動かし形にする。', axes:'掘る × 巻き込む', place:'寺', list:['DGBF','DGRF','JGBF','JGRF']}
+};
+var T = {
+ JSRF:{n:'祭り屋',c:'思いつきを、その夜のうちに祭りにする。',d:['祭り屋のあなたは、面白いことを思いついた瞬間に人を集め、その場を沸かせてしまう人です。あなたがいるだけで場の温度が上がり、気づけば周りが動き出しています。','興味があちこちに飛ぶからこそ、異なる人や分野を一つの場に集められます。ただ、始めることに全力を注ぐ分、祭りのあとの片付けや継続は苦手かもしれません。'],s:[['着火の速さ','面白いと思った瞬間に、人と場を動かし始める'],['場を沸かす力','あなたがいるだけで、場の温度が上がる'],['人を集める嗅覚','誰と誰をつなげば面白くなるかがわかる']],p:'始めた祭りの片付けを忘れがち。始める前に「誰が続きを持つか」を一人だけ決めておきましょう。',pt:'あなたが集めた熱を、細部まで作り込まれた形に残してくれます。',r:'開始直後の「場の着火役」。初対面同士の緊張をほどき、全員が話し出せる空気をつくってください。',st:'最近気になっている人を3人選び、来週お茶に誘うメッセージを今日送る。'},
+ JSBF:{n:'仕掛け人',c:'誰も気づかないうちに、街ごと踊らせる。',d:['仕掛け人のあなたは、表に出るより裏で企みを練り、人が自然と動き出す仕組みをつくる人です。いろいろな場所で拾ったネタを頭の中で寝かせ、ある日まとめて仕掛けます。','あなたの企画は、気づいた時には周りが巻き込まれているのが特徴です。ただ、仕込みに凝るあまり、本番がどんどん先に延びてしまうことがあります。'],s:[['裏側の設計力','人が動きたくなる仕組みを組み立てられる'],['伏線の張り方','後で効いてくる仕込みを自然に置ける'],['人の動かし方','押しつけずに、自分から動きたくさせる']],p:'仕込みに凝りすぎて本番が遠のく。仕掛けの「初日」を先に決め、そこから逆算して作りましょう。',pt:'あなたの構想をすぐ小さく試し、効くかどうかを確かめてくれます。',r:'議論の後半で、出たアイデアを「どう仕掛ければ広まるか」に組み立て直す役。',st:'温めている企画の「一番小さな仕掛け」を一つ決め、実行日をカレンダーに入れる。'},
+ DSRF:{n:'一番槍',c:'誰より先に飛び込み、後ろに道をつくる。',d:['一番槍のあなたは、誰も手をつけていない場所に真っ先に飛び込む人です。一度決めたら迷わず深く突き進み、その背中を見た人が後からついてきます。','常識をズラした目標を、熱量で現実にしていく突破力があります。ただ、走るのが速すぎて、振り返ると誰もついてきていないこともあります。'],s:[['突破力','誰も手をつけない壁に、最初に穴を開けられる'],['迷わない決断','決めたら振り返らずに進める'],['背中で見せる熱量','言葉より行動で人を引っ張る']],p:'一人で先に行きすぎる。週に一度だけ立ち止まり、何をしているかを仲間に共有しましょう。',pt:'あなたが切り開いた道の情報を集めて整理し、次の一手の地図をつくってくれます。',r:'登壇者の課題に「自分がやる」と最初に手を挙げ、タッグ結成の口火を切る役。',st:'迷っている挑戦を一つ選び、今日中に申し込みか宣言をする。'},
+ DSBF:{n:'演出家',c:'一度の幕で、人の常識をひっくり返す。',d:['演出家のあなたは、人の心が動く瞬間を設計できる人です。ただ情報を伝えるのではなく、体験として届けることにこだわります。','一つのテーマに深く潜り、頭の中で何度もリハーサルしてから幕を開けるので、本番の完成度は抜群です。ただ、理想の演出が浮かぶまで動けないことがあります。'],s:[['体験の設計','伝えたいことを、心が動く体験に変えられる'],['見せ場づくり','人の記憶に残る一場面をつくれる'],['感情の動かし方','驚きや感動の順番を組み立てられる']],p:'完璧な演出を待って動けない。まず「見せ場一つだけ」の小さな試演をしましょう。',pt:'現場に飛び込んで持ち帰った生の素材が、あなたの演出の種になります。',r:'チームの案を発表するときの「見せ方担当」。結論の前に、聞き手がワクワクする一場面を用意してください。',st:'次に人前で話す機会の「最初の30秒」だけを、驚きのある形に作り直す。'},
+ JSRO:{n:'花火師',c:'3日で飽きるが、3時間で世界を変える。',d:['花火師のあなたは、頭の中で常にいくつものアイデアが打ち上がっている人です。一つのことに長く留まるのは苦手ですが、火がついた瞬間の爆発力は誰にも真似できません。','あなたの発想は、まったく関係のない分野同士を結びつけるところから生まれます。必要なのは飽きる自分を責めることではなく、打ち上げた花火を拾って形にしてくれる仲間と組むことです。'],s:[['瞬間火力','思いついてから形にするまでが、誰よりも速い'],['アイデアの量','10案求められたら30案出せる'],['ジャンルを越える跳躍','異業種の手法を持ち込み、常識をズラせる']],p:'打ち上げたまま、次の花火へ行ってしまう。アイデアを出したら、その場で「誰に渡すか」まで決めましょう。',pt:'あなたの花火を勝ち筋のある計画に変え、仲間を配置して最後まで動かしてくれます。',r:'アイデアソンの最初の10分で場を温める「着火役」。量を出す時間はあなたが引っ張り、絞り込みは他のタイプに任せましょう。',st:'今週のアイデアから一つ選び、形にしてくれそうな人に今日中にメッセージを送る。'},
+ JSBO:{n:'錬金術師',c:'ガラクタ同士を混ぜて、金に変える。',d:['錬金術師のあなたは、誰も結びつけないもの同士を掛け合わせて、新しい価値を生み出す人です。あちこちで拾った材料を頭の中で寝かせ、ある日まったく新しいものに錬成します。','あなたの発想は、時間をかけて熟成するほど深みが増します。ただ、材料を集める過程が楽しすぎて、肝心の錬成がなかなか始まらないことがあります。'],s:[['異分野の掛け合わせ','遠いもの同士を結びつけて新しくする'],['発想の熟成','寝かせるほど、アイデアが深くなる'],['独自の視点','誰も見ていない角度から物事を見る']],p:'材料集めで満足してしまう。「今月はこの2つを混ぜる」と組み合わせを先に決めましょう。',pt:'あなたの錬成のレシピを、すぐに現場で形にしてくれます。',r:'議論が煮詰まったとき、別の業界の事例を持ち込んで流れを変える役。',st:'メモに眠っているアイデアを2つ選び、掛け合わせた企画を一行で書いてみる。'},
+ DSRO:{n:'発明家',c:'欲しいものがなければ、今夜つくる。',d:['発明家のあなたは、不便や違和感に気づいたら、自分の手で解決策をつくってしまう人です。一度潜ると止まらず、気づけば試作品ができています。','手を動かしながら考えるので、アイデアが形になる速さは群を抜いています。ただ、作ったものの価値を人に説明するのは後回しにしがちです。'],s:[['手を動かす速さ','考えるより先に、形ができている'],['試作力','とりあえず動くものを、すぐにつくれる'],['課題を見つける目','誰もが慣れてしまった不便に気づける']],p:'作ったものを説明しない。完成したら「誰のどんな困りごとを解決するか」を一文で書き添えましょう。',pt:'あなたの発明を、誰もが欲しくなる物語にして届けてくれます。',r:'アイデアソンの途中で、紙やツールで「とりあえずの試作」をつくって見せる役。',st:'最近作ったものを一つ選び、知り合い一人に見せて感想をもらう。'},
+ DSBO:{n:'異端児',c:'10年後の当たり前を、今ひとりで言っている。',d:['異端児のあなたは、まだ誰も気づいていない未来を見ている人です。一つのテーマを深く考え抜いた末に、常識の外側にある答えにたどり着きます。','あなたの考えは、時代が追いつけば大きな価値になります。ただ、早すぎるがゆえに理解されず、一人で抱え込んでしまうことがあります。'],s:[['先を読む目','まだ誰も気づかない変化を先に見ている'],['独自の世界観','自分だけの筋の通った考えを持っている'],['ブレない信念','周りに否定されても考えを手放さない']],p:'理解されずに孤立する。自分の考えを、相手の言葉に一度だけ翻訳して伝えてみましょう。',pt:'あなたの構想を、人と仕事の流れに落とし込んで回してくれます。',r:'議論の最後に「10年後から見ると、この案はどうか」と問いを投げる役。',st:'自分だけが信じている未来予測を一つ書き出し、信頼できる人一人に話してみる。'},
+ DGBO:{n:'職人',c:'誰も見ない細部に、魂を宿す。',d:['職人のあなたは、一つのことを誰よりも深く極め、妥協のない完成度で仕上げる人です。周りが気づかない細部にこそ、あなたのこだわりが詰まっています。','時間をかけて磨いたものは、見る人が見れば一目でわかる本物になります。ただ、100点になるまで世に出さないため、出すタイミングを逃すことがあります。'],s:[['圧倒的な完成度','細部まで手を抜かずに仕上げる'],['妥協しない目','ほんのわずかな違いを見抜ける'],['継続する力','同じことを何年でも磨き続けられる']],p:'完璧になるまで出さない。「70点で一度だけ人に見せる日」を決めましょう。',pt:'あなたの作品を、たくさんの人が集まる場に連れ出してくれます。',r:'出たアイデアのうち一つを選び、「本気でやるならここまでやる」という質の基準を示す役。',st:'作りかけのものを一つ選び、今の状態のまま信頼できる人に見せる。'},
+ DGRO:{n:'実験屋',c:'仮説を立てる前に、もう試している。',d:['実験屋のあなたは、考えるより先に手を動かし、試しながら答えを見つける人です。一つのテーマを深く掘りながら、失敗を恐れずに何度でも試します。','あなたの手数の多さが、誰も見つけられなかった答えにつながります。ただ、試すこと自体が楽しくなり、結論を出さずに次の実験へ進んでしまうことがあります。'],s:[['検証の速さ','気になったら、すぐに確かめられる'],['失敗を恐れない手数','うまくいかなくても次を試せる'],['データ感覚','結果から傾向を読み取れる']],p:'実験が目的になる。各実験の前に「何がわかったら終わりか」を一行で書いておきましょう。',pt:'あなたの実験結果を、人が動き出す大きな仕掛けに変えてくれます。',r:'「それ、今ここで試せる？」と言って、その場で小さな検証をする役。',st:'気になっている仮説を一つ選び、30分でできる最小の実験をしてみる。'},
+ JGBO:{n:'収集家',c:'集めた点が、ある日ひとつの星座になる。',d:['収集家のあなたは、好きなことについて誰よりも幅広く、深く知っている人です。興味の向くままに集めた知識が、ある日突然つながって新しい意味を持ちます。','あなたの記録や知識は、チームにとって宝の山です。ただ、集めることに満足して、形にしないまま眠らせてしまうことがあります。'],s:[['知識の幅と深さ','好きな分野なら誰にも負けない'],['記録癖','見聞きしたことを残しておける'],['つながりを見抜く目','バラバラの情報から意味を見つける']],p:'集めて終わる。集めたものから毎月一つ、人に見せる形（記事・まとめ・図）にしましょう。',pt:'あなたの地図を手に、真っ先に現場へ飛び込んでくれます。',r:'登壇者の課題に対して「似た事例がある」と引き出しを開ける役。',st:'集めている情報から一つのテーマを選び、3行のまとめを書いて共有する。'},
+ JGRO:{n:'探検家',c:'地図のない場所ほど、足が速くなる。',d:['探検家のあなたは、まだ誰も行っていない場所に自分の足で向かう人です。好奇心のままに現場へ飛び込み、そこでしか得られない一次情報を手に入れます。','未知の状況でも動じない強さが、あなたの武器です。ただ、発見したことを持ち帰って共有する前に、次の旅へ出てしまいがちです。'],s:[['現場に飛び込む行動力','気になったら、自分の足で見に行く'],['未知への耐性','先が見えなくても楽しめる'],['一次情報','ネットにはない生の情報を持っている']],p:'発見を持ち帰らない。旅から戻ったら、その日のうちに「発見3つ」を誰かに送りましょう。',pt:'あなたが持ち帰った生の素材を、人の心を動かす体験に変えてくれます。',r:'机上の議論になったとき、「現場ではこうだった」と実体験を持ち込む役。',st:'行ったことのない場所を一つ選び、今週中に訪ねる予定を入れる。'},
+ DGBF:{n:'軍師',c:'勝ち筋を描き切ってから、仲間を動かす。',d:['軍師のあなたは、状況を深く読み解き、勝てる道筋を描いてから人を動かす人です。誰をどこに置けば最大の力が出るかを、自然と見抜いています。','あなたの計画があると、チームは迷わずに走れます。ただ、計画を完璧にしたいあまり、号令をかけるのが遅れることがあります。'],s:[['戦略設計','勝てる道筋を最初から最後まで描ける'],['先読み','起こりうる問題に先回りできる'],['人の配置の妙','誰をどこに置けば活きるかがわかる']],p:'計画が完璧になるまで動かない。「8割の計画で号令、残りは走りながら直す」と決めましょう。',pt:'次々と打ち上がるアイデアが、あなたの戦略の弾薬になります。',r:'アイデアが出そろったあと、「勝てる案はどれか」を選び、実行の段取りを描く役。',st:'止まっている計画を一つ選び、今日中に関係者へ最初の指示を一つ出す。'},
+ DGRF:{n:'棟梁',c:'腕で語り、背中で現場を動かす。',d:['棟梁のあなたは、確かな専門技能を持ち、現場を素早く動かしていく人です。口で説明するより先に手を動かし、その姿で周りを引っ張ります。','あなたがいる現場は、段取りよく形になっていきます。ただ、自分でやったほうが早いと感じて、仕事を抱え込んでしまうことがあります。'],s:[['専門技能','人に頼られる確かな腕を持っている'],['現場の統率','人と作業を一つの方向にまとめられる'],['段取りの速さ','何から手をつけるべきかがすぐわかる']],p:'全部自分でやってしまう。毎週一つ、仲間に任せる仕事を決めましょう。',pt:'あなたの腕に、誰も思いつかない新しい材料とレシピを持ち込んでくれます。',r:'アイデアを「明日から誰が何をするか」に分解し、実行チームを組む役。',st:'今抱えている仕事から一つを選び、得意そうな人に任せてみる。'},
+ JGBF:{n:'語り部',c:'深い知識を、誰もがワクワクする物語に変える。',d:['語り部のあなたは、難しいことや専門的なことを、誰にでも伝わる物語にできる人です。幅広い知識をじっくり咀嚼し、人の心に届く言葉に変えて語ります。','あなたが話すと、聞き手は学びながら自然と動き出します。ただ、話したいことが多すぎて、話が広がったまま着地しないことがあります。'],s:[['翻訳力','難しい話を、誰にでもわかる言葉にできる'],['ストーリーテリング','情報を、続きが気になる物語にできる'],['学びの場づくり','人が自然と学びたくなる場をつくれる']],p:'話が着地しない。話す前に「最後に何をしてほしいか」を一つだけ決めておきましょう。',pt:'あなたが語る物語に、実物という説得力を与えてくれます。',r:'チームの議論をまとめ、ほかのチームや登壇者に伝わる言葉で発表する役。',st:'自分の専門分野の話を一つ選び、中学生にもわかる3行の説明を書いてみる。'},
+ JGRF:{n:'番頭',c:'100個のタスクと100人の機嫌を、同時に回す。',d:['番頭のあなたは、たくさんの仕事と人を同時に動かし、全体を回していく人です。幅広い知識と気配りで、場の空気を読みながら次々と物事を前に進めます。','あなたがいるチームは、止まらずに回り続けます。ただ、人の案件を回すことに忙しく、自分のやりたいことが後回しになりがちです。'],s:[['同時並行の処理力','いくつもの仕事を止めずに回せる'],['調整力','立場の違う人の間をうまくつなげる'],['場の空気を読む力','誰が困っているかにすぐ気づける']],p:'自分の夢が後回しになる。週に一度、自分のためだけのプロジェクトの時間を確保しましょう。',pt:'あなたが回す力を、誰も見たことのない大きな構想に向けさせてくれます。',r:'タッグ結成後、連絡先の交換と次回の予定決めまでを仕切る役。',st:'後回しにしている自分のやりたいことを一つ書き出し、着手する日を決める。'}
+};
+var ATTR_ORDER = ['SF','SO','GO','GF'];
+
+// ---------- helpers ----------
+var $ = function(id){ return document.getElementById(id); };
+function img(code, eager){ return '<div class="art"><img src="chars/' + code + '.jpg" alt="' + T[code].n + 'のキャラクター" width="640" height="603"' + (eager ? '' : ' loading="lazy"') + '></div>'; }
+function attrOf(code){ return ATTR[code[1] + code[3]]; }
+function flip(code){ var m = {D:'J',J:'D',S:'G',G:'S',R:'B',B:'R',F:'O',O:'F'}; return code.split('').map(function(c){ return m[c]; }).join(''); }
+function show(id){ ['home','quiz','report'].forEach(function(s){ $(s).hidden = (s !== id); }); }
+function scrollTop(){ window.scrollTo(0,0); }
+function toast(msg){ var el = $('toast'); el.textContent = msg; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function(){ el.hidden = true; }, 2000); }
+
+// ---------- home ----------
+function renderHome(){
+  $('hero-cast').innerHTML = ['JSRF','JSRO','DGBO','DGBF'].map(function(c){ return '<button type="button" class="zcard" data-type="' + c + '" style="padding:0;border:none;background:none" aria-label="' + T[c].n + 'の解説を見る">' + img(c, true) + '</button>'; }).join('');
+  $('axes').innerHTML = AX.map(function(a, i){
+    return '<div class="axcard"><div class="bar" style="background:' + a.c + '"></div><div class="n">軸' + '①②③④'[i] + '　' + a.name + '</div><div class="poles">' + a.A + '<i>／</i>' + a.B + '</div><p>' + a.help + '</p></div>';
+  }).join('');
+  $('zukan').innerHTML = ATTR_ORDER.map(function(k){
+    var at = ATTR[k];
+    return '<div class="attr-block"><div class="attr-head"><span class="chip" style="background:' + at.c + '">' + at.n + '</span><span class="one" style="color:' + at.c + '">' + at.one + '</span><span class="meta">' + at.axes + '／象徴の場所：' + at.place + '</span></div>' +
+      '<div class="zukan">' + at.list.map(function(c){
+        return '<button type="button" class="zcard" data-type="' + c + '">' + img(c) + '<div class="zn">' + T[c].n + '<small>' + c + '</small></div><div class="zc">' + T[c].c + '</div></button>';
+      }).join('') + '</div></div>';
+  }).join('');
+}
+
+// ---------- quiz ----------
+function buildAll(){
+  var list = [];
+  AXQ.forEach(function(qs, ax){ qs.forEach(function(t, i){ list.push({no:ax*20+i+1, t:t, ax:ax, dir:(i % 2 === 0) ? 1 : -1}); }); });
+  ENVQ.forEach(function(q, i){ list.push({no:81+i, t:q[2], env:q[0], dir:q[1]}); });
+  return list;
+}
+var ALL = buildAll();
+function interleave(list){
+  var b = [[],[],[],[],[]];
+  list.forEach(function(q){ b[q.env !== undefined ? 4 : q.ax].push(q); });
+  var out = [], i = 0, more = true;
+  while(more){ more = false; for(var k=0;k<5;k++){ if(b[k][i]){ out.push(b[k][i]); more = true; } } i++; }
+  return out;
+}
+var S = {mode:'full', list:[], idx:0, ans:{}};
+function save(){ try{ localStorage.setItem('uc-shindan', JSON.stringify({mode:S.mode, idx:S.idx, ans:S.ans})); }catch(e){} }
+function clearSave(){ try{ localStorage.removeItem('uc-shindan'); }catch(e){} }
+function start(mode, resume){
+  S.mode = mode;
+  var base = mode === 'short' ? ALL.filter(function(q){ return SHORT.indexOf(q.no) >= 0; }) : ALL;
+  S.list = interleave(base);
+  S.idx = resume ? Math.min(resume.idx, S.list.length - 1) : 0; S.ans = resume ? (resume.ans || {}) : {};
+  $('q-mode').textContent = 'アンコモンズ診断';
+  show('quiz'); renderQ(); scrollTop();
+}
+var SIZES = [44,38,32,26,32,38,44];
+var LABELS = ['まったく違う','違う','やや違う','どちらでもない','ややそう','そう','まさに私'];
+function renderQ(){
+  var q = S.list[S.idx], n = S.list.length;
+  $('q-count').textContent = (S.idx+1) + ' / ' + n;
+  $('q-bar').style.width = (S.idx / n * 100) + '%';
+  $('q-no').textContent = 'Q' + (S.idx+1);
+  $('q-text').textContent = q.t;
+  $('q-back').disabled = S.idx === 0;
+  var cur = S.ans[q.no], html = '';
+  for(var i=0;i<7;i++){
+    var v = i - 3, col = v < 0 ? 'var(--sub)' : (v > 0 ? 'var(--ink)' : 'var(--line)');
+    html += '<button type="button" class="dot' + (cur === v ? ' on' : '') + '" data-v="' + v + '" aria-label="' + LABELS[i] + '" style="width:' + SIZES[i] + 'px;height:' + SIZES[i] + 'px;--c:' + col + '"></button>';
+  }
+  $('scale').innerHTML = html;
+}
+function answer(v){
+  var q = S.list[S.idx]; S.ans[q.no] = v;
+  if(S.idx < S.list.length - 1){ S.idx++; save(); renderQ(); }
+  else { clearSave(); var res = compute(); renderReport(codeOf(res.pctA), res); }
+}
+function compute(){
+  var sum = [0,0,0,0], cnt = [0,0,0,0], es = [0,0,0,0,0], ec = [0,0,0,0,0];
+  S.list.forEach(function(q){
+    var v = S.ans[q.no]; if(v === undefined) return;
+    if(q.env !== undefined){ es[q.env] += v * q.dir; ec[q.env]++; } else { sum[q.ax] += v * q.dir; cnt[q.ax]++; }
+  });
+  return {
+    pctA: sum.map(function(s,i){ return cnt[i] ? Math.round(50 + s / (cnt[i]*6) * 100) : 50; }),
+    env: es.map(function(s,i){ if(!ec[i]) return 3; var m = ec[i]*3; return Math.max(1, Math.min(5, Math.round(1 + 4 * (s + m) / (2*m)))); })
+  };
+}
+function codeOf(pctA){ return pctA.map(function(p,i){ return p >= 50 ? AX[i].la : AX[i].lb; }).join(''); }
+function strength(p, isTop){ return p <= 55 ? '両刀：どちらの尖りも出し入れできる' : p <= 70 ? '寄り：場面によって使い分けている' : p <= 85 ? 'はっきり：あなたの武器として表れている' : (isTop ? '振り切れ：ここがあなたの一番の尖り' : '振り切れ：とても強く表れている'); }
+
+// ---------- report (result when res given, zukan detail otherwise) ----------
+var lastShare = '';
+// 公開時はここを本番のURLに差し替える
+var SHARE_URL = 'https://khoshino666.github.io/uncommons-shindan/';
+function shareBlock(){
+  var text = lastShare, u = encodeURIComponent(SHARE_URL), tx = encodeURIComponent(text);
+  var links = [
+    ['X（旧Twitter）', 'https://twitter.com/intent/tweet?text=' + tx + '&url=' + u],
+    ['LINE', 'https://line.me/R/msg/text/?' + encodeURIComponent(text + ' ' + SHARE_URL)],
+    ['Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + u],
+    ['Threads', 'https://www.threads.net/intent/post?text=' + encodeURIComponent(text + ' ' + SHARE_URL)]
+  ];
+  return '<div class="share"><div class="share-h">結果をシェアする</div><div class="share-row">' +
+    links.map(function(l){ return '<a class="sbtn" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>'; }).join('') +
+    '<button class="sbtn" id="btn-share" type="button">文章をコピー</button></div>' +
+    '<p class="share-note">Instagramなどは、文章をコピーして結果画面のスクリーンショットと一緒に投稿してください。</p>' +
+    '<div class="copybox" id="copybox" hidden></div></div>';
+}
+function renderReport(code, res){
+  var t = T[code], at = attrOf(code), pc = flip(code), pt = T[pc], pat = attrOf(pc);
+  var scores = '';
+  if(res){
+    var str = res.pctA.map(function(p){ return Math.max(p, 100-p); });
+    var topAx = str.indexOf(Math.max.apply(null, str));
+    var axes = res.pctA.map(function(pA, i){
+      var a = AX[i], isA = pA >= 50, p = isA ? pA : 100 - pA, pole = isA ? a.A : a.B;
+      return '<div class="axis"><div class="lbl"><span style="color:var(--sub)">' + a.name + '：</span><b style="color:' + a.c + '">' + p + '% ' + pole + '</b>' + (i === topAx ? '<span class="top-tag">一番の尖り</span>' : '') + '</div>' +
+        '<div class="track" style="background:' + a.c + '" title="' + a.help + '"><div class="knob" style="left:' + (100 - pA) + '%;border-color:' + a.c + '"></div></div>' +
+        '<div class="ends">' + (isA ? '<b>' + a.A + '</b><span>' + a.B + '</span>' : '<span>' + a.A + '</span><b>' + a.B + '</b>') + '</div>' +
+        '<div class="strength">' + strength(p, i === topAx) + '</div></div>';
+    }).join('');
+    var meters = res.env.map(function(lv, i){
+      var e = ENV[i], word = lv >= 4 ? e.hi : lv <= 2 ? e.lo : 'どちらでも', segs = '';
+      for(var k=1;k<=5;k++) segs += '<i class="' + (k <= lv ? 'on' : '') + '"></i>';
+      return '<div class="meter"><div class="row"><span>' + e.name + '</span><strong style="color:' + (lv === 3 ? 'var(--sub)' : 'var(--ink)') + '">' + word + '</strong></div><div class="segs' + (lv === 5 ? ' hot' : '') + '" role="img" aria-label="' + e.name + ' 5段階中' + lv + '">' + segs + '</div></div>';
+    }).join('');
+    var ranked = res.env.map(function(lv,i){ return {i:i, lv:lv, d:Math.abs(lv-3)}; }).filter(function(x){ return x.d > 0; }).sort(function(a,b){ return b.d - a.d; }).slice(0,2);
+    var glow = ranked.length ? ranked.map(function(x){ var e = ENV[x.i]; return x.lv > 3 ? e.hg : e.lg; }).join('、') : 'どんな場でも力を出せるバランス型';
+    var wither = ranked.length ? ranked.map(function(x){ var e = ENV[x.i]; return x.lv > 3 ? e.hw : e.lw; }).join('、') : '特に苦手な環境は見当たりません';
+    scores = '<div class="card"><div class="card-h"><h2>尖りの振り幅</h2><span>4つの軸</span></div>' + axes + '</div>' +
+      '<div class="card"><div class="card-h"><h2>爆発する環境</h2><span>5段階</span></div>' + meters +
+      '<div class="envsum"><div><strong style="color:var(--ax3)">輝く場所</strong>' + glow + '</div><div><strong style="color:var(--sub)">枯れる場所</strong>' + wither + '</div></div></div>';
+    lastShare = '私はアンコモンズ診断で「' + t.n + '（' + code + '）」でした。' + t.c + ' #アンコモンズ診断';
+  }
+  var stg = t.s.map(function(s,i){ return '<div class="tg"><span class="k" style="color:' + at.c + '">' + ['壱','弐','参'][i] + '</span><div><strong>' + s[0] + '</strong>　' + s[1] + '</div></div>'; }).join('');
+  var you = res ? 'あなた' : 'このタイプ';
+  var actions = res
+    ? shareBlock() +
+      '<a class="cta line" href="https://uncommonsworld.com/apply/" target="_blank" rel="noopener">アンコモンズを目指す →</a>' +
+      '<button class="linkbtn" type="button" data-go="zukan">ほかのキャラを図鑑で見る</button>'
+    : '<button class="cta fill" type="button" data-go="start">自分のタイプを診断する（100問）</button><button class="linkbtn" type="button" data-go="zukan">← 図鑑に戻る</button>';
+
+  $('report').innerHTML =
+    '<div class="back"><button class="linkbtn" type="button" data-go="' + (res ? 'home' : 'zukan') + '">← ' + (res ? 'トップへ' : '図鑑に戻る') + '</button></div>' +
+    '<div class="band">' + img(code, true) +
+      '<div class="meta"><span class="chip" style="background:' + at.c + '">' + at.n + '</span><span class="code">' + code + '</span></div>' +
+      (res ? '<div class="lead">あなたのタイプは</div>' : '') +
+      '<h1 class="tname">' + t.n + '</h1><p class="catch">' + t.c + '</p><p class="aline">' + at.s + '：' + at.one + '</p></div>' +
+    '<div class="desc">' + (res ? '<p>' + t.d[0] + '</p><p>' + t.d[1] + '</p>' : '<p>' + t.d[0].replace(/のあなたは/g,'は').replace(/あなた/g,'この人') + '</p><p>' + t.d[1].replace(/のあなたは/g,'は').replace(/あなた/g,'この人') + '</p>') + '</div>' +
+    scores +
+    '<div class="sec"><h2>' + you + 'の尖り</h2>' + stg + '</div>' +
+    '<div class="sec"><h2>落とし穴と、その越え方</h2><p>' + t.p + '</p></div>' +
+    '<div class="sec"><h2>セッションでの役割</h2><p>' + t.r + '</p></div>' +
+    '<button type="button" class="partner" data-type="' + pc + '">' + img(pc) + '<div><div class="pl">相棒タイプ</div><div class="pn">' + pt.n + '</div><div class="code" style="color:var(--sub)">' + pc + '・' + pat.s + '</div><p>' + t.pt + '</p><span class="more">' + pt.n + 'の解説を見る →</span></div></button>' +
+    '<div class="step"><div class="sl">明日やる、小さな一歩</div><p>' + t.st + '</p></div>' +
+    '<div class="actions">' + actions + '</div>' +
+    '<p class="disc">この診断は、自分の特性を知り活かすためのもので、医学的な診断ではありません。</p>';
+  show('report'); scrollTop();
+}
+
+// ---------- navigation ----------
+function go(where){
+  if(where === 'start' || where === 'zukan' || where === 'home'){
+    show('home');
+    var el = where === 'zukan' ? $('zukan-anchor') : null;
+    if(el){ el.scrollIntoView({behavior:'auto'}); } else { scrollTop(); }
+  }
+}
+document.addEventListener('click', function(e){
+  var g = e.target.closest('[data-go]'); if(g){ go(g.getAttribute('data-go')); return; }
+  var ty = e.target.closest('[data-type]'); if(ty){ renderReport(ty.getAttribute('data-type'), null); return; }
+  if(e.target.id === 'btn-share'){
+    var box = $('copybox');
+    var full = lastShare + ' ' + SHARE_URL;
+    try{ navigator.clipboard.writeText(full).then(function(){ toast('文章をコピーしました'); }, function(){ box.textContent = full; box.hidden = false; }); }
+    catch(err){ box.textContent = full; box.hidden = false; }
+  }
+});
+$('btn-start').addEventListener('click', function(){ start('full'); });
+$('btn-sample').addEventListener('click', function(){ renderReport('JSRO', {pctA:[22,72,88,39], env:[5,5,3,4,4]}); });
+$('scale').addEventListener('click', function(e){ var b = e.target.closest('.dot'); if(b) answer(parseInt(b.getAttribute('data-v'),10)); });
+$('q-back').addEventListener('click', function(){ if(S.idx > 0){ S.idx--; save(); renderQ(); } });
+$('q-quit').addEventListener('click', function(){ clearSave(); go('home'); });
+document.addEventListener('keydown', function(e){ if($('quiz').hidden) return; var n = parseInt(e.key, 10); if(n >= 1 && n <= 7) answer(n - 4); });
+
+renderHome();
+// deep link: #JSRO opens that character
+var h = (location.hash || '').replace('#','').toUpperCase();
+if(T[h]) renderReport(h, null);
+else {
+  try{ var saved = JSON.parse(localStorage.getItem('uc-shindan') || 'null'); if(saved && saved.ans && Object.keys(saved.ans).length) start('full', saved); }catch(e){}
+}
+})();
+</script>
+
+</body></html>
