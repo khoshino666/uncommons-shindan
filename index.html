@@ -1,8 +1,8 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>アンコモンズ診断</title>
-<meta name="description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す100問の診断です。">
+<meta name="description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す30問の診断です。">
 <meta property="og:title" content="アンコモンズ診断">
-<meta property="og:description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す100問の診断です。">
+<meta property="og:description" content="4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出す30問の診断です。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://khoshino666.github.io/uncommons-shindan/">
 <meta property="og:image" content="https://khoshino666.github.io/uncommons-shindan/chars/JSRO.jpg">
@@ -230,7 +230,7 @@ nav.links button:hover{color:var(--ink)}
         <h1>アンコモンズ診断</h1>
         <p class="lead">集中のしかた、発想のしかた、動き出し、熱の伝わり方。4つの軸からあなたの「尖り」を16のキャラに分け、どんな環境で爆発するかまで出します。</p>
         <div class="modes">
-          <button class="mode primary" id="btn-start" type="button">診断をはじめる<span>100問・約12分</span></button>
+          <button class="mode primary" id="btn-start" type="button">診断をはじめる<span>30問・約5分</span></button>
         </div>
         <button class="linkbtn" id="btn-sample" type="button">先にサンプル結果（花火師）を見る</button>
         <p class="note">7段階で、直感で答えてください。途中で閉じても、続きから再開できます。この診断は自分の特性を知り活かすためのもので、医学的な診断ではありません。</p>
@@ -248,7 +248,7 @@ nav.links button:hover{color:var(--ink)}
 
   <!-- QUIZ -->
   <section id="quiz" class="col" hidden>
-    <div class="qhead"><span id="q-count">1 / 100</span><span id="q-mode">アンコモンズ診断</span></div>
+    <div class="qhead"><span id="q-count">1 / 30</span><span id="q-mode">アンコモンズ診断</span></div>
     <div class="progress"><i id="q-bar" style="width:0%"></i></div>
     <div class="qcard"><div class="qno" id="q-no">Q1</div><div class="qtext" id="q-text"></div></div>
     <div class="scale" id="scale" role="group" aria-label="回答"></div>
@@ -266,7 +266,7 @@ nav.links button:hover{color:var(--ink)}
       <div class="silo" id="silo"><img id="silo-img" src="chars/JSRF.jpg" alt="" width="640" height="603"></div>
       <p class="lmsg" id="lmsg">診断中です。少々お待ちください。</p>
       <div class="lbar"><i id="lbar"></i></div>
-      <p class="lsub">100の答えから、あなただけの尖りを読み解いています</p>
+      <p class="lsub">30の答えから、あなただけの尖りを読み解いています</p>
     </div>
   </section>
 
@@ -297,7 +297,8 @@ var ENVQ = [
  [3,1,'毎日同じルーティンだと、だんだん元気がなくなる。'],[3,1,'行ったことのない場所に行くと、アイデアが次々わく。'],[3,-1,'音や光、人の動きが多い場所は、すぐに疲れてしまう。'],[3,-1,'決まった場所・決まった道具だと、安心して力を出せる。'],
  [4,1,'「すごい！」と言われると、本当に何倍も頑張れる。'],[4,1,'すぐに反応が返ってこないと、やる気が続かない。'],[4,-1,'人の評価より、自分の中の手応えのほうが大事だ。'],[4,-1,'注目されすぎると、かえってやりにくくなる。']
 ];
-var SHORT = [1,2,4,5,9,21,22,25,28,29,41,42,43,46,48,61,62,64,65,68,81,85,89,93,97];
+// 出題する30問：各4軸から6問（両方向で3問ずつ）＋爆発環境6問
+var SHORT = [1,2,4,5,17,18, 21,22,25,29,32,40, 41,42,43,46,47,48, 61,62,63,65,68,80, 81,85,89,92,93,97];
 var ENV = [
  {name:'締切・緊張感', hi:'追い込みで燃える', lo:'余裕があると冴える', hg:'締切が近い短期決戦', hw:'期限のない仕事', lg:'時間に余裕のある場', lw:'急な締切が続く場'},
  {name:'裁量・自由度', hi:'任されて燃える', lo:'型があると動ける', hg:'やり方を任される場', hw:'細かい手順が決まった仕事', lg:'ゴールと手順が明確な場', lw:'丸投げされる仕事'},
@@ -375,7 +376,7 @@ function save(){ try{ localStorage.setItem('uc-shindan', JSON.stringify({mode:S.
 function clearSave(){ try{ localStorage.removeItem('uc-shindan'); }catch(e){} }
 function start(mode, resume){
   S.mode = mode;
-  var base = mode === 'short' ? ALL.filter(function(q){ return SHORT.indexOf(q.no) >= 0; }) : ALL;
+  var base = ALL.filter(function(q){ return SHORT.indexOf(q.no) >= 0; });
   S.list = interleave(base);
   S.idx = resume ? Math.min(resume.idx, S.list.length - 1) : 0; S.ans = resume ? (resume.ans || {}) : {};
   $('q-mode').textContent = 'アンコモンズ診断';
@@ -574,7 +575,7 @@ function renderReport(code, res){
     ? shareBlock() +
       '<a class="cta line" href="https://uncommonsworld.com/apply/" target="_blank" rel="noopener">アンコモンズを目指す →</a>' +
       '<button class="linkbtn" type="button" data-go="zukan">ほかのキャラを図鑑で見る</button>'
-    : '<button class="cta fill" type="button" data-go="start">自分のタイプを診断する（100問）</button><button class="linkbtn" type="button" data-go="zukan">← 図鑑に戻る</button>';
+    : '<button class="cta fill" type="button" data-go="start">自分のタイプを診断する（30問・約5分）</button><button class="linkbtn" type="button" data-go="zukan">← 図鑑に戻る</button>';
 
   $('report').innerHTML =
     '<div class="back"><button class="linkbtn" type="button" data-go="' + (res ? 'home' : 'zukan') + '">← ' + (res ? 'トップへ' : '図鑑に戻る') + '</button></div>' +
